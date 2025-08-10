@@ -1,0 +1,21 @@
+# Node modules
+nirvrti-client/node_modules/
+nirvrti-server/node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+nirvrti-client/.env
+nirvrti-server/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
