@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-
+const API_URL = process.env.REACT_APP_API_URL;
 const Writing = () => {
   const [note, setNote] = useState('');
   const [entries, setEntries] = useState([]);
@@ -10,7 +10,7 @@ const Writing = () => {
     const fetchEntries = async () => {
       try {
         const token = localStorage.getItem('token'); // Adjust if you store token elsewhere
-        const res = await fetch('/api/writing', {
+        const res = await fetch(`${API_URL}/api/writing`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -35,7 +35,7 @@ const Writing = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('/api/writing', {
+      const res = await fetch(`${API_URL}/api/writing`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Writing = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`/api/writing/${id}`, {
+      const res = await fetch(`${API_URL}/api/writing/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

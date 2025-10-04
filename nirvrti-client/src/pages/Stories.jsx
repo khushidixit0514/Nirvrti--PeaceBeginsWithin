@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FaTrash } from "react-icons/fa";
 import "./style.css";
-
+const API_URL = process.env.REACT_APP_API_URL;
 const Stories = () => {
   const [stories, setStories] = useState([]);
   const [selectedStory, setSelectedStory] = useState(null);
@@ -34,7 +34,7 @@ const Stories = () => {
     if (!token) return;
 
     try {
-      const res = await fetch(`/api/stories?userOnly=${viewMode === "my"}`, {
+      const res = await fetch(`${API_URL}/api/stories?userOnly=${viewMode === "my"}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -63,7 +63,7 @@ const Stories = () => {
     if (!token) return alert("You must be logged in");
 
     try {
-      const res = await fetch("/api/stories", {
+      const res = await fetch(`${API_URL}/api/stories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const Stories = () => {
     if (!window.confirm("Are you sure you want to delete this story?")) return;
 
     try {
-      await fetch(`/api/stories/${storyId}`, {
+      await fetch(`${API_URL}/api/stories/${storyId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

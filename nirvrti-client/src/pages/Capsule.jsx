@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./style.css";
-
+const API_URL = process.env.REACT_APP_API_URL;
 export default function Capsule() {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -22,7 +22,7 @@ export default function Capsule() {
       if (!token) return;
 
       try {
-        const res = await fetch("/api/capsule", {
+        const res = await fetch(`${API_URL}/api/capsule`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch capsules");
@@ -85,7 +85,7 @@ export default function Capsule() {
     }
 
     try {
-      const res = await fetch("/api/capsule", {
+      const res = await fetch(`${API_URL}/api/capsule`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export default function Capsule() {
     }
 
     try {
-      const res = await fetch(`/api/capsule/${id}`, {
+      const res = await fetch(`${API_URL}/api/capsule/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
