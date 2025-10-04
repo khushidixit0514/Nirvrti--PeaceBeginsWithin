@@ -1,13 +1,18 @@
+// 
+
+
+
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import cors from 'cors'; // ✅ Import CORS
 
 // Import routes
 import authRoutes from './routes/authRoutes.js';
 import writingRoutes from './routes/writingRoutes.js';
 import capsuleRoutes from './routes/capsuleRoutes.js';
 import userRoutes from './routes/userRoutes.js';
-import storyRoutes from './routes/storyRoutes.js'
+import storyRoutes from './routes/storyRoutes.js';
 
 // Import middleware
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
@@ -17,21 +22,23 @@ connectDB();
 
 const app = express();
 
+// ✅ CORS setup
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // allow React frontend
+  credentials: true
+}));
+
 // Middleware to parse JSON bodies
 app.use(express.json());
-
-// If you use EJS or any template engine, setup here (optional)
-// app.set('view engine', 'ejs');
-// app.set('views', './views');
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/writing', writingRoutes);
 app.use('/api/capsule', capsuleRoutes);
 app.use('/api/user', userRoutes);
-app.use("/api/stories", storyRoutes);
+app.use('/api/stories', storyRoutes);
 
-// Error handling middleware (should be after routes)
+// Error handling middleware (after routes)
 app.use(notFound);
 app.use(errorHandler);
 
