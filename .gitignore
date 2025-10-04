@@ -6,10 +6,7 @@ nirvrti-server/node_modules/
 dist/
 build/
 
-# Environment variables
-.env
-nirvrti-client/.env
-nirvrti-server/.env
+
 
 # Logs
 npm-debug.log*
